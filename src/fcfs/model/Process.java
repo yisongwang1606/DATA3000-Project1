@@ -18,60 +18,60 @@ public class Process {
      * @param burstTime CPU time required by the process.
      */
     public Process(String processId, int arrivalTime, int burstTime) {
-        // We save the process identifier so each process can be shown clearly in the final output.
         this.processId = processId;
-        // We save the arrival time because FCFS ordering depends on arrival sequence.
         this.arrivalTime = arrivalTime;
-        // We save the burst time because execution duration drives waiting and turnaround calculations.
         this.burstTime = burstTime;
-        // We initialize waiting time to zero because it will be calculated during simulation.
         this.waitingTime = 0;
-        // We initialize turnaround time to zero because it will be calculated during simulation.
         this.turnaroundTime = 0;
     }
 
+    /** Returns the process identifier. */
     public String getProcessId() {
         return processId;
     }
 
+    /** Updates the process identifier. */
     public void setProcessId(String processId) {
-        // We update the process identifier so external callers can rename a process when needed.
         this.processId = processId;
     }
 
+    /** Returns the arrival time. */
     public int getArrivalTime() {
         return arrivalTime;
     }
 
+    /** Updates the arrival time. */
     public void setArrivalTime(int arrivalTime) {
-        // We update the arrival time so this object can reflect corrected scheduling input.
         this.arrivalTime = arrivalTime;
     }
 
+    /** Returns the burst time. */
     public int getBurstTime() {
         return burstTime;
     }
 
+    /** Updates the burst time. */
     public void setBurstTime(int burstTime) {
-        // We update the burst time so this object can reflect corrected execution duration.
         this.burstTime = burstTime;
     }
 
+    /** Returns the waiting time. */
     public int getWaitingTime() {
         return waitingTime;
     }
 
+    /** Updates the waiting time. */
     public void setWaitingTime(int waitingTime) {
-        // We store the calculated waiting time so we can display process-specific FCFS results.
         this.waitingTime = waitingTime;
     }
 
+    /** Returns the turnaround time. */
     public int getTurnaroundTime() {
         return turnaroundTime;
     }
 
+    /** Updates the turnaround time. */
     public void setTurnaroundTime(int turnaroundTime) {
-        // We store the calculated turnaround time so we can display process-specific FCFS results.
         this.turnaroundTime = turnaroundTime;
     }
 }

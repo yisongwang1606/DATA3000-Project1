@@ -8,7 +8,7 @@ A Java implementation of FCFS (First Come, First Served) CPU scheduling.
 
 ## Source Code Structure
 
-- `src/App.java`: Entry point, starts the simulation.
+- `src/fcfs/App.java`: Entry point, starts the simulation.
 - `src/fcfs/algorithm/FCFSAlgorithm.java`: Main FCFS workflow and result calculation.
 - `src/fcfs/model/Process.java`: Process data model (`processId`, `arrivalTime`, `burstTime`, `waitingTime`, `turnaroundTime`).
 - `src/fcfs/queue/QueueInterface.java`: Queue API.
@@ -26,13 +26,13 @@ java -jar FCFSProject.jar
 
 ```powershell
 mkdir bin
-javac -d bin src\App.java src\fcfs\algorithm\FCFSAlgorithm.java src\fcfs\model\Process.java src\fcfs\queue\QueueInterface.java src\fcfs\queue\QueueImplementation.java
-java -cp bin App
+javac -d bin src\fcfs\App.java src\fcfs\algorithm\FCFSAlgorithm.java src\fcfs\model\Process.java src\fcfs\queue\QueueInterface.java src\fcfs\queue\QueueImplementation.java
+java -cp bin fcfs.App
 ```
 
 ## Runtime Logic
 
-1. `App.main()` creates `FCFSAlgorithm` and calls `runSimulation()`.
+1. `fcfs.App.main()` creates `FCFSAlgorithm` and calls `runSimulation()`.
 2. `runSimulation()` shows a start dialog, reads process count, and collects each process's arrival/burst time.
 3. Processes are sorted by arrival time.
 4. All processes are enqueued into the custom queue.
