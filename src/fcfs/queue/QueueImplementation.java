@@ -1,4 +1,4 @@
-﻿package fcfs.queue;
+package fcfs.queue;
 
 /**
  * Implements a queue using a single linked list.
