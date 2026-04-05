@@ -1,4 +1,4 @@
-package fcfs.queue;
+﻿package fcfs.queue;
 
 /**
  * Implements a queue using a single linked list.
@@ -12,85 +12,92 @@ public class QueueImplementation<T> implements QueueInterface<T> {
      * @param <T> node data type.
      */
     private static class Node<T> {
+        // Stores the value held by this node.
         private T data;
+        // Points to the next node in the list.
         private Node<T> next;
 
+        // Creates a node with data and no next node.
         private Node(T data) {
-            // We store the value inside the node so queue operations can access it later.
             this.data = data;
-            // We initialize the next pointer to null because a new node is initially disconnected.
             this.next = null;
         }
     }
 
+    // Points to the first element of the queue.
     private Node<T> frontNode;
+    // Points to the last element of the queue.
     private Node<T> backNode;
 
+    // Initializes an empty queue.
     public QueueImplementation() {
-        // We initialize the front pointer to null because the queue starts empty.
         this.frontNode = null;
-        // We initialize the back pointer to null because the queue starts empty.
         this.backNode = null;
     }
 
     @Override
+    // Adds a new element to the end of the queue.
     public void enqueue(T newEntry) {
-        // We create a new node so the incoming element can be linked into the queue.
+        // Build a new node for the incoming element.
         Node<T> newNode = new Node<>(newEntry);
-        // We check whether the queue is empty so we can initialize both pointers correctly.
+
+        // If queue is empty, new node becomes the front node.
         if (isEmpty()) {
-            // We point the front to the new node because it is the first element in the queue.
             frontNode = newNode;
         } else {
-            // We link the current back node to the new node so the list remains connected.
+            // Otherwise, link current back node to the new node.
             backNode.next = newNode;
         }
-        // We move the back pointer to the new node because it is now the last element.
+
+        // Move back pointer to the newly added node.
         backNode = newNode;
     }
 
     @Override
+    // Removes and returns the element at the front of the queue.
     public T dequeue() {
-        // We prevent invalid removal by checking whether the queue has no elements.
+        // Prevent dequeue on an empty queue.
         if (isEmpty()) {
-            // We throw an exception so callers know dequeue cannot run on an empty queue.
             throw new IllegalStateException("Cannot dequeue from an empty queue.");
         }
-        // We read the front value so we can return the removed element.
+
+        // Save front data before moving front pointer.
         T frontData = frontNode.data;
-        // We move the front pointer forward to remove the first node logically.
+
+        // Advance front pointer to the next node.
         frontNode = frontNode.next;
-        // We check whether the queue became empty after removing the front node.
+
+        // If queue became empty, clear back pointer as well.
         if (frontNode == null) {
-            // We reset the back pointer to null so both pointers consistently represent an empty queue.
             backNode = null;
         }
-        // We return the removed element to complete the dequeue contract.
+
+        // Return removed element value.
         return frontData;
     }
 
     @Override
+    // Returns the element at the front without removing it.
     public T getFront() {
-        // We prevent invalid access by checking whether there is no front element.
+        // Prevent front access on an empty queue.
         if (isEmpty()) {
-            // We throw an exception so callers know front access is invalid on an empty queue.
             throw new IllegalStateException("Cannot get front from an empty queue.");
         }
-        // We return the front data because this method should not remove elements.
+
+        // Return current front value.
         return frontNode.data;
     }
 
     @Override
+    // Checks whether the queue has no elements.
     public boolean isEmpty() {
-        // We report empty status by checking whether the front pointer is null.
         return frontNode == null;
     }
 
     @Override
+    // Removes all elements by resetting pointers.
     public void clear() {
-        // We drop the front pointer so all nodes become unreachable and the queue is cleared.
         frontNode = null;
-        // We drop the back pointer so queue state remains consistent after clearing.
         backNode = null;
     }
 }

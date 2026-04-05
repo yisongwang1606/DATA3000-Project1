@@ -1,18 +1,36 @@
-## Getting Started
+﻿# FCFS Project 1
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Java implementation of FCFS (First Come, First Served) CPU scheduling.
 
-## Folder Structure
+## Java Version
 
-The workspace contains two folders by default, where:
+- Java 8 or higher
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Run the JAR
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+```powershell
+java -jar FCFSProject.jar
+```
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Compile and Run from Source
 
-## Dependency Management
+```powershell
+mkdir bin
+javac -d bin src\App.java src\fcfs\algorithm\FCFSAlgorithm.java src\fcfs\model\Process.java src\fcfs\queue\QueueInterface.java src\fcfs\queue\QueueImplementation.java
+java -cp bin App
+```
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Program Interaction
+
+- The program uses `JOptionPane` dialogs.
+- Enter number of processes, then each process's arrival time and burst time.
+- The program displays waiting time, turnaround time, and averages.
+
+## Sample Run (Quick Check)
+
+For 5 processes with results:
+
+- Waiting time: `0, 3, 5, 6, 11`
+- Turnaround time: `4, 6, 7, 12, 16`
+- Average waiting time: `5.00`
+- Average turnaround time: `9.00`
