@@ -1,0 +1,26 @@
+# Build outputs
+bin/
+out/
+target/
+build/
+dist/
+
+# Java artifacts
+*.class
+*.log
+
+# IDE / editor
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db

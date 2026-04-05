@@ -143,27 +143,20 @@ public class FCFSAlgorithm {
     private void showProcessResults(Process[] processes) {
         // We create a string builder so result lines can be assembled efficiently.
         StringBuilder resultBuilder = new StringBuilder();
-        // We add a title so the first dialog clearly identifies what is being displayed.
-        resultBuilder.append("FCFS Scheduling Results\n\n");
-        // We add a header row so each column meaning is clear to the user.
-        resultBuilder.append("Process\tArrival\tBurst\tWaiting\tTurnaround\n");
-        // We add a separator row so table data is easier to read.
-        resultBuilder.append("-----------------------------------------------------\n");
-        // We iterate through all processes so every process result appears in the table.
+        // We iterate through all processes so every process result appears with the requested arrow style.
         for (int i = 0; i < processes.length; i++) {
-            // We append process ID so each row is traceable to the correct process.
-            resultBuilder.append(processes[i].getProcessId()).append("\t");
-            // We append arrival time so the user can compare entered and scheduled timing.
-            resultBuilder.append(processes[i].getArrivalTime()).append("\t");
-            // We append burst time so the CPU duration per process is visible.
-            resultBuilder.append(processes[i].getBurstTime()).append("\t");
-            // We append waiting time so per-process delay is visible.
-            resultBuilder.append(processes[i].getWaitingTime()).append("\t");
-            // We append turnaround time so total completion time is visible.
-            resultBuilder.append(processes[i].getTurnaroundTime()).append("\n");
+            // We append each process line in the requested chained format.
+            resultBuilder.append("Process ").append(processes[i].getProcessId()).append(" - Arrival Time - ")
+                    .append(processes[i].getArrivalTime()).append(" - Waiting Time - ")
+                    .append(processes[i].getWaitingTime()).append(" - Turnaround Time - ")
+                    .append(processes[i].getTurnaroundTime());
+            // We add a blank line between process entries so the dialog is easier to read.
+            if (i < processes.length - 1) {
+                resultBuilder.append("\n\n");
+            }
         }
         // We show the process results dialog so the user can inspect per-process metrics.
-        JOptionPane.showMessageDialog(null, resultBuilder.toString(), "Process Results", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, resultBuilder.toString(), "Results", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
