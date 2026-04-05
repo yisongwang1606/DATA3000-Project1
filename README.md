@@ -1,18 +1,28 @@
 ﻿# FCFS Project 1
 
-Java implementation of FCFS (First Come, First Served) CPU scheduling.
+A Java implementation of FCFS (First Come, First Served) CPU scheduling.
 
 ## Java Version
 
 - Java 8 or higher
 
-## Run the JAR
+## Source Code Structure
+
+- `src/App.java`: Entry point, starts the simulation.
+- `src/fcfs/algorithm/FCFSAlgorithm.java`: Main FCFS workflow and result calculation.
+- `src/fcfs/model/Process.java`: Process data model (`processId`, `arrivalTime`, `burstTime`, `waitingTime`, `turnaroundTime`).
+- `src/fcfs/queue/QueueInterface.java`: Queue API.
+- `src/fcfs/queue/QueueImplementation.java`: Linked-list queue implementation (`Node`, `enqueue`, `dequeue`, `isEmpty`, `clear`).
+
+## How to Run
+
+### Run JAR
 
 ```powershell
 java -jar FCFSProject.jar
 ```
 
-## Compile and Run from Source
+### Compile and Run from Source
 
 ```powershell
 mkdir bin
@@ -20,17 +30,23 @@ javac -d bin src\App.java src\fcfs\algorithm\FCFSAlgorithm.java src\fcfs\model\P
 java -cp bin App
 ```
 
-## Program Interaction
+## Runtime Logic
 
-- The program uses `JOptionPane` dialogs.
-- Enter number of processes, then each process's arrival time and burst time.
-- The program displays waiting time, turnaround time, and averages.
+1. `App.main()` creates `FCFSAlgorithm` and calls `runSimulation()`.
+2. `runSimulation()` shows a start dialog, reads process count, and collects each process's arrival/burst time.
+3. Processes are sorted by arrival time.
+4. All processes are enqueued into the custom queue.
+5. FCFS execution loop (`while !queue.isEmpty()`):
+   - Dequeue next process.
+   - If CPU is idle (`currentTime < arrivalTime`), move `currentTime` to that arrival time.
+   - Compute `waitingTime = currentTime - arrivalTime`.
+   - Compute `turnaroundTime = waitingTime + burstTime`.
+   - Update `currentTime += burstTime`.
+6. Show per-process results and average waiting/turnaround times via `JOptionPane`.
 
-## Sample Run (Quick Check)
+## Input Validation
 
-For 5 processes with results:
-
-- Waiting time: `0, 3, 5, 6, 11`
-- Turnaround time: `4, 6, 7, 12, 16`
-- Average waiting time: `5.00`
-- Average turnaround time: `9.00`
+- Process count must be a positive integer.
+- Arrival time must be a non-negative integer.
+- Burst time must be a positive integer.
+- Canceling input stops the simulation with a warning dialog.
